@@ -32,6 +32,9 @@ function matchKey(key)
           var kick = new Audio('sounds/kick-bass.mp3');
           kick.play();
           break;
+      default:
+          alert("Wrong one!");
+          break;
     }
 
 }
@@ -41,10 +44,21 @@ for(var i = 0; i < document.querySelectorAll('.drum').length; i++)
     {
       var button = this.innerHTML;
       matchKey(button);
+      buttonAnimation(button);
       
     });
   }
 
 document.addEventListener("keypress", function(event){
+    buttonAnimation(event.key);
     matchKey(event.key);
 })
+
+function buttonAnimation(currentKey)
+{
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    }, 100);
+}
